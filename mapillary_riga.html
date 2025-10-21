@@ -24,14 +24,15 @@
   <!-- Load Mapillary viewer library -->
   <script src="https://unpkg.com/@mapillary/js@4.0.0/dist/mapillary.min.js"></script>
   <script>
+    // Initialize the Mapillary viewer
     const viewer = new Mapillary.Viewer({
       container: 'mly',
-      accessToken: 'MLY|25134822499509256|6cee1be1674f625d376686af1526e56f', // ← replace with your real token
+      accessToken: 'MLY|25134822499509256|6cee1be1674f625d376868af1526e56f' // replace with your own token if needed
     });
 
-    // Center roughly on Riga, Latvia
-    viewer.moveTo(56.9496, 24.1052)
-      .catch(err => console.warn('MoveTo error:', err));
+    // Move the camera to Riga, Latvia (longitude, latitude)
+    viewer.moveToLngLat([24.1052, 56.9496])
+      .catch(err => console.warn('MoveToLngLat error:', err));
   </script>
 </body>
 </html>
