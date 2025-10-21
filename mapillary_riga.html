@@ -4,35 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mapillary Viewer - Riga</title>
+  <!-- Mapillary v4 CSS (important) -->
+  <link rel="stylesheet" href="https://unpkg.com/@mapillary/js@4.0.0/dist/mapillary.min.css">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
-    #mly {
-      width: 100vw;
-      height: 100vh;
-    }
+    html, body { margin:0; padding:0; height:100%; width:100%; overflow:hidden; }
+    #mly { width:100vw; height:100vh; }
+    #err { position:fixed; bottom:8px; left:8px; background:#fff; padding:6px 8px; font:12px/1.3 monospace; border:1px solid #ddd; }
   </style>
 </head>
 <body>
   <div id="mly"></div>
+  <div id="err" style="display:none"></div>
 
-  <!-- Load Mapillary viewer library -->
+  <!-- Mapillary v4 JS -->
   <script src="https://unpkg.com/@mapillary/js@4.0.0/dist/mapillary.min.js"></script>
   <script>
-    // Initialize the Mapillary viewer
+    function showErr(e){
+      const box = document.getElementById('err');
+      box.style.display = 'block';
+      box.textContent = 'Error: ' + (e && e.message ? e.message : e);
+      console.warn(e);
+    }
+
     const viewer = new Mapillary.Viewer({
       container: 'mly',
-      accessToken: 'MLY|25134822499509256|6cee1be1674f625d376868af1526e56f' // replace with your own token if needed
+      accessToken: 'MLY|25134822499509256|6cee1be1674f625d376686af1526e56f', // <- your READ token
+      imageId: '632382322485818&x=0.7590950427529779&y=0.4766243308241557&zoom=0&focus=photo' // <- paste the pKey you copied
     });
 
-    // Move the camera to Riga, Latvia (longitude, latitude)
-    viewer.moveToLngLat([24.1052, 56.9496])
-      .catch(err => console.warn('MoveToLngLat error:', err));
+    // If you prefer centering instead of a fixed image, uncomment this:
+    // viewer.moveToLngLat([24.1052, 56.9496]).catch(showErr);
   </script>
 </body>
 </html>
