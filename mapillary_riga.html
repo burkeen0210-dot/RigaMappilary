@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapillary Viewer - Riga</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    #mly {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <div id="mly"></div>
+
+  <!-- Load Mapillary viewer library -->
+  <script src="https://unpkg.com/@mapillary/js@4.0.0/dist/mapillary.min.js"></script>
+  <script>
+    const viewer = new Mapillary.Viewer({
+      container: 'mly',
+      accessToken: 'MLY|25134822499509256|6cee1be1674f625d376686af1526e56f', // ← replace with your real token
+    });
+
+    // Center roughly on Riga, Latvia
+    viewer.moveTo(56.9496, 24.1052)
+      .catch(err => console.warn('MoveTo error:', err));
+  </script>
+</body>
+</html>
